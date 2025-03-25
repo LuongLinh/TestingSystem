@@ -3,6 +3,8 @@ package com.rin.TestingSystem.controller;
 import com.rin.TestingSystem.entity.Department;
 import com.rin.TestingSystem.services.IDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,8 @@ public class DepartmentController {
     private IDepartmentService departmentService;
 
     @GetMapping
-    public List<Department> getAllDepartment() {
-        return departmentService.getAllDepartments();
+    public Page<Department> getAllDepartment(Pageable pageable) {
+        return departmentService.getAllDepartments(pageable);
     }
 
     @PostMapping
@@ -41,5 +43,10 @@ public class DepartmentController {
     @GetMapping("{id}")
     public Department getDepartmentById(@PathVariable int id) {
         return departmentService.getDepartmentById(id);
+    }
+
+    @DeleteMapping("name/{name}")
+    public void deleteDepartmentByName(@PathVariable String name) {
+
     }
 }

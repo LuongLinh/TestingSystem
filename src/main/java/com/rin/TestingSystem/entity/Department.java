@@ -1,22 +1,15 @@
 package com.rin.TestingSystem.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name = "Department")
-@NoArgsConstructor // tạo constructor
-//@Setter
-//@Getter
 public class Department {
-    @Id // primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // auto increment
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DepartmentID")
     private int id;
-
-    @Column(name = "DepartmentName", length = 50, nullable = false)
+    private int totalMember;
+    @Column(name = "DepartmentName", length = 30, nullable = false, unique = true)
     private String name;
 
     public int getId() {
@@ -25,6 +18,14 @@ public class Department {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getTotalMember() {
+        return totalMember;
+    }
+
+    public void setTotalMember(int totalMember) {
+        this.totalMember = totalMember;
     }
 
     public String getName() {
